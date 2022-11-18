@@ -13,7 +13,6 @@ import {Main} from "./n1-main/m1-UI/components/Main";
 export const App = () => {
     return (
         <div className="App">
-            Hello, samurai! It's Friday Project Time!
             <Routes>
                 <Route path={'/'} element={<Main/>}/>
 
