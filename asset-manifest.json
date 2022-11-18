@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/FridayProject/static/css/main.82beea43.css",
+    "main.js": "/FridayProject/static/js/main.68bc569b.js",
+    "index.html": "/FridayProject/index.html",
+    "main.82beea43.css.map": "/FridayProject/static/css/main.82beea43.css.map",
+    "main.68bc569b.js.map": "/FridayProject/static/js/main.68bc569b.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.82beea43.css",
+    "static/js/main.68bc569b.js"
+  ]
+}
