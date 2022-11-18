@@ -8,13 +8,16 @@ import {TestComponents} from "./n1-main/m1-UI/components/TestComponents";
 import {Login} from "./n1-main/m1-UI/components/Login";
 import {Profile} from "./n1-main/m1-UI/components/Profile";
 import {Route, Routes} from "react-router-dom";
+import {Main} from "./n1-main/m1-UI/components/Main";
 
 export const App = () => {
     return (
         <div className="App">
             Hello, samurai! It's Friday Project Time!
             <Routes>
-                <Route path={'/'} element={<Profile/>}/>
+                <Route path={'/'} element={<Main/>}/>
+
+                <Route path={'/profile'} element={<Profile/>}/>
                 {/*<Profile/>*/}
 
                 {/*<Registration/>*/}
