@@ -13,6 +13,8 @@ export const Post: React.FC<PostType> = ({postId}) => {
     const dispatch = useAppDispatch()
     // @ts-ignore
     const post = useAppSelector(state => state.posts.byId[postId])
+    // @ts-ignore
+    const author = useAppSelector(state => state.authors.byId[post.authorId])
 
     // console.log(post)
 
@@ -34,7 +36,7 @@ export const Post: React.FC<PostType> = ({postId}) => {
 
     return (
         <div style={{marginTop: '10px'}}>
-            <b>{post.author.name}</b>
+            <b>{author.name}</b>
             <br/>
             {
                 editMode ?

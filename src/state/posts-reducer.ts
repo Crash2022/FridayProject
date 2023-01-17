@@ -1,11 +1,12 @@
 // state
 import {AppThunkType} from "./store";
-import {fridayAPI} from "../api/api";
+import {fridayAPI, PostAPIType} from '../api/api';
+import {mapToLookupTable} from '../common/utils/mapToLookupTable';
 
 const initialState: PostsInitialStateType = {
     // posts: [] as PostsType[],
     allIds: [] as number[],
-    byId: {} as { [key: string]: PostsType }
+    byId: {} as { [key: string]: PostType }
 }
 
 export type PostsInitialStateType = {
@@ -14,24 +15,15 @@ export type PostsInitialStateType = {
     byId: {}
 }
 
-export type PostsType = {
+export type PostType = {
     id: number
-    author: AuthorType
+    // author: AuthorType
+    authorId: number
     text: string
     likes: number
 }
 
-export type AuthorType = {
-    id: number
-    name: string
-}
 
-const mapToLookupTable = (items: any[]) => {
-    return items.reduce((acc, el) => {
-        acc[el.id] = el;
-        return acc;
-    }, {})
-}
 
 // reducer
 export const postsReducer = (state: PostsInitialStateType = initialState,
@@ -41,7 +33,15 @@ export const postsReducer = (state: PostsInitialStateType = initialState,
             // return {...state, posts: action.payload.posts};
             return {...state,
                 allIds: action.payload.posts.map(p => p.id),
-                byId: mapToLookupTable(action.payload.posts)
+                byId: mapToLookupTable(action.payload.posts.map(p => {
+                    const copy: PostType = {
+                        id: p.id,
+                        authorId: p.author.id,
+                        text: p.text,
+                        likes: p.likes
+                    }
+                    return copy
+                }))
             }
         }
         case 'POSTS/UPDATE_POST': {
@@ -66,7 +66,7 @@ export const postsReducer = (state: PostsInitialStateType = initialState,
 export type PostsActionsTypes = GetPostsACType | UpdatePostACType;
 
 export type GetPostsACType = ReturnType<typeof getPostsAC>
-export const getPostsAC = (posts: PostsType[]) => ({
+export const getPostsAC = (posts: PostAPIType[]) => ({
     type: 'POSTS/GET_POSTS', payload: {posts}
 } as const)
 

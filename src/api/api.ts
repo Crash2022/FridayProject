@@ -1,8 +1,18 @@
-import {PostsType} from "../state/posts-reducer";
+export type PostAPIType = {
+    id: number
+    author: AuthorAPIType
+    text: string
+    likes: number
+}
+
+export type AuthorAPIType = {
+    id: number
+    name: string
+}
 
 export const fridayAPI = {
     getPosts() {
-        return new Promise<PostsType[]>((resolve) => {
+        return new Promise<PostAPIType[]>((resolve) => {
             setTimeout(() => {
                 resolve([
                     {
@@ -31,6 +41,15 @@ export const fridayAPI = {
                         },
                         text: 'I like Angular',
                         likes: 100
+                    },
+                    {
+                        id: 4,
+                        author: {
+                            id: 13,
+                            name: 'Valera'
+                        },
+                        text: 'React is a shit!',
+                        likes: 5
                     }
                 ])
             }, 2000)

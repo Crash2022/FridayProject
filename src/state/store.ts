@@ -1,6 +1,7 @@
 import {applyMiddleware, combineReducers, compose, legacy_createStore} from "redux";
 import thunkMiddleware, {ThunkAction, ThunkDispatch} from 'redux-thunk';
 import {PostsActionsTypes, postsReducer} from "./posts-reducer";
+import {authorsReducer} from './authors-reducer';
 
 // для React Redux DevTools Chrome
 declare global {
@@ -16,7 +17,8 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 
 const rootReducer = combineReducers({
-    posts: postsReducer
+    posts: postsReducer,
+    authors: authorsReducer
 })
 
 // @ts-ignore
