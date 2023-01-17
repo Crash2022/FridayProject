@@ -14,6 +14,7 @@ export type PostsType = {
     id: number
     author: string
     text: string
+    likes: number
 }
 
 // reducer
