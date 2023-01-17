@@ -1,27 +1,30 @@
 import React, {useState, ChangeEvent} from 'react';
-import {PostsType, updatePostAC} from "../../state/posts-reducer";
+import {updatePostTC} from "../../state/posts-reducer";
 import {useAppDispatch} from "../../common/hooks/useAppDispatch";
+import {useAppSelector} from "../../common/hooks/useAppSelector";
 
 type PostType = {
-    post: PostsType
+    // post: PostsType
     postId: number
 }
 
-export const Post: React.FC<PostType> = ({post, postId}) => {
+export const Post: React.FC<PostType> = ({postId}) => {
 
     const dispatch = useAppDispatch()
+    const post = useAppSelector(state => state.posts.byId[postId])
+
+    // console.log(post)
 
     const [editMode, setEditMode] = useState<boolean>(false)
-    const [inputValue, setInputValue] = useState<string>('')
+    const [inputValue, setInputValue] = useState<string>(post.text)
 
     const onClickEditSpanHandler = () => {
         setEditMode(true)
-        setInputValue(post.text)
     }
 
     const onClickNotEditSpanHandler = () => {
         setEditMode(false)
-        dispatch(updatePostAC(postId, inputValue))
+        dispatch(updatePostTC(post.id, inputValue))
     }
 
     const onChangeInputHandler = (event: ChangeEvent<HTMLInputElement>) => {
@@ -30,7 +33,7 @@ export const Post: React.FC<PostType> = ({post, postId}) => {
 
     return (
         <div style={{marginTop: '10px'}}>
-            <b>{post.author}</b>
+            <b>{post.author.name}</b>
             <br/>
             {
                 editMode ?

@@ -1,12 +1,13 @@
 import React, {useEffect} from 'react';
 import {useAppSelector} from "../../common/hooks/useAppSelector";
 import {Post} from "./Post";
-import {setPostsTC} from "../../state/posts-reducer";
+import {getPostsTC} from "../../state/posts-reducer";
 import {useAppDispatch} from "../../common/hooks/useAppDispatch";
 
 export const Posts = () => {
-    const posts = useAppSelector(state => state.posts.posts)
+
     const dispatch = useAppDispatch()
+    const ids = useAppSelector(state => state.posts.allIds)
 
     const style = {
         padding: '20px 0',
@@ -17,14 +18,14 @@ export const Posts = () => {
     }
 
     useEffect(() => {
-        dispatch(setPostsTC())
+        dispatch(getPostsTC())
     }, [])
 
     return (
         <div>
             <div style={style}>Posts</div>
                 {
-                    posts.map(p => <Post key={p.id} post={p} postId={p.id}/>)
+                    ids.map(id => <Post key={id} postId={id}/>)
                 }
         </div>
     )
