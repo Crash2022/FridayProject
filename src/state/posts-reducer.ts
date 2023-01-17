@@ -52,6 +52,7 @@ export const postsReducer = (state: PostsInitialStateType = initialState,
                 ...state,
                 byId: {
                     ...state.byId,
+                    // @ts-ignore
                     [action.payload.postId]: {...state.byId[action.payload.postId], text: action.payload.text}
                 }
             }

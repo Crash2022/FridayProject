@@ -11,6 +11,7 @@ type PostType = {
 export const Post: React.FC<PostType> = ({postId}) => {
 
     const dispatch = useAppDispatch()
+    // @ts-ignore
     const post = useAppSelector(state => state.posts.byId[postId])
 
     // console.log(post)
