@@ -13,9 +13,9 @@
 import {createRoot} from 'react-dom/client';
 import React from 'react';
 import './index.css';
-import {App} from './App';
+import {App} from './app/App';
 import {Provider} from "react-redux";
-import {store} from "./n1-main/m2-BLL/store";
+import {store} from "./state/store";
 import {BrowserRouter, HashRouter} from "react-router-dom";
 
 const container = document.getElementById('root');
