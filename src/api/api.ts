@@ -1,16 +1,15 @@
-import axios from "axios";
-
-const instance = axios.create({
-    baseURL: '',
-    withCredentials: true
-})
+import {PostsType} from "../state/posts-reducer";
 
 export const fridayAPI = {
-    getData() {
-        return (
-            instance
-                .get('', {})
-            //.then(response => response.data)
-        )
+    getPosts() {
+        return new Promise<PostsType[]>((resolve) => {
+            setTimeout(() => {
+                resolve([
+                    {id: 1, author: 'Crash', text: 'I studying React'},
+                    {id: 2, author: 'Dimych', text: `I'm the boss of IT-Incubator`},
+                    {id: 3, author: 'Valera', text: 'I like Angular'},
+                ])
+            }, 2000)
+        })
     }
 }

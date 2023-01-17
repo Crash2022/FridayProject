@@ -1,24 +1,42 @@
+// state
+import {AppThunkType} from "./store";
+import {fridayAPI} from "../api/api";
+
 const initialState: PostsInitialStateType = {
-    id: 'some value'
+    posts: [] as PostsType[]
 }
 
 export type PostsInitialStateType = {
-    id: string
+    posts: PostsType[]
 }
 
-export type ProfileActionTypes = NewCaseACType;
+export type PostsType = {
+    id: number
+    author: string
+    text: string
+}
 
-export const postsReducer = (state: PostsInitialStateType = initialState, action: ProfileActionTypes): PostsInitialStateType => {
-    switch(action.type) {
-        case 'NEW_CASE': {
-            return {...state};
+// reducer
+export const postsReducer = (state: PostsInitialStateType = initialState, action: PostsActionsTypes): PostsInitialStateType => {
+    switch (action.type) {
+        case 'POSTS/SET_POSTS': {
+            return {...state, posts: action.payload.posts};
         }
         default:
             return state;
     }
 }
 
-export type NewCaseACType = ReturnType<typeof newCaseAC>
-export const newCaseAC = () => ({
-    type: 'NEW_CASE'
+// actions
+export type PostsActionsTypes = SetPostsACType;
+
+export type SetPostsACType = ReturnType<typeof setPostsAC>
+export const setPostsAC = (posts: PostsType[]) => ({
+    type: 'POSTS/SET_POSTS', payload: {posts}
 } as const)
+
+// thunks
+export const setPostsTC = (): AppThunkType => async (dispatch) => {
+    const posts = await fridayAPI.getPosts()
+    dispatch(setPostsAC(posts))
+}
