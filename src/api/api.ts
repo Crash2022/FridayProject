@@ -11,5 +11,8 @@ export const fridayAPI = {
                 ])
             }, 2000)
         })
+    },
+    updatePost(postId: number, text: string) {
+        return Promise.resolve({})
     }
 }
